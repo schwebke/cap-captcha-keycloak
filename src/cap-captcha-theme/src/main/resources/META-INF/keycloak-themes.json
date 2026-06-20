@@ -1,0 +1,8 @@
+{
+  "themes": [
+    {
+      "name": "cap-captcha",
+      "types": ["login"]
+    }
+  ]
+}
