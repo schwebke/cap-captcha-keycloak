@@ -2,6 +2,8 @@
 
 A minimal Keycloak login theme that renders the cap widget on the registration page using the **self-hosted asset server** variant (cap with `ENABLE_ASSETS_SERVER=true`). It is `keycloak.v2` plus exactly the cap-relevant FreeMarker changes — no other customizations.
 
+<img src="../../doc/assets/kc-example-theme-register.png" width="600" alt="Registration page rendered with the cap-captcha sample theme, showing the cap widget">
+
 This is a reference sample. It is built into a deployable theme jar (`cap-captcha-theme.jar`) as its own Maven module, but it is **not** bundled inside the extension jar — the extension itself stays theme-agnostic. Use it as-is, or fold its `register.ftl` / `messages_*.properties` into your own theme.
 
 The module is a plain jar module — `src/main/resources` holds the theme and the Keycloak manifest, packaged as-is by the standard `maven-jar-plugin` (no assembly descriptor):
@@ -55,6 +57,8 @@ The stock reCAPTCHA block is left in place — it is harmless and only renders w
 3. Restart Keycloak (or run `kc.sh build` then restart) so both the SPI and the classpath theme are picked up.
 
 4. In the realm settings, set **Theme** → **Login Theme** to `cap-captcha`.
+
+   <img src="../../doc/assets/kc-example-theme-settings.png" width="600" alt="Realm settings: set Login Theme to cap-captcha">
 
    The theme jar carries a `META-INF/keycloak-themes.json` manifest (source: [`src/main/resources/META-INF/keycloak-themes.json`](src/main/resources/META-INF/keycloak-themes.json)) that registers the `cap-captcha` login theme with Keycloak.
 

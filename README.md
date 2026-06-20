@@ -79,7 +79,7 @@ The built-in `registration` flow cannot be edited directly, so you work on a cop
 
    No `Bypass on Error` option exists — registration is always fail-closed, matching Keycloak's `RegistrationRecaptcha`.
 
-5. Bind the copy as the registration flow: with the copy selected, **Action** menu → **Bind flow** → **Registration flow**.
+5. Bind the copy as the realm's registration flow. The binding is done from within the copied flow's details — open it, then **Action** menu → **Bind flow** → **Registration flow**. The screenshot below shows the result back in the flows list: `registration cap` is now bound as the registration flow.
 
    <img src="doc/assets/cap-kc-04.png" width="600" alt="Bound registration flow in the flows list">
 
