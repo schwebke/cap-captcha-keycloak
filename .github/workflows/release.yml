@@ -1,0 +1,54 @@
+name: release
+
+on:
+  push:
+    tags: ['*']
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build and publish JARs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build with Docker (cached)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          tags: cap-captcha-keycloak:build
+          outputs: type=local,dest=./dist
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Upload workflow artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: jars
+          path: dist/*.jar
+          if-no-files-found: error
+
+      - name: Create or update GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" \
+              dist/cap-captcha-keycloak.jar \
+              dist/cap-captcha-theme.jar
+          else
+            gh release create "$GITHUB_REF_NAME" \
+              --generate-notes \
+              dist/cap-captcha-keycloak.jar \
+              dist/cap-captcha-theme.jar
+          fi

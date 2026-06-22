@@ -12,7 +12,8 @@ This project is not affiliated with or endorsed by the Keycloak project or the c
 
 ## Prerequisites
 
-- Keycloak (repo tags record the build we compiled against and tested; other versions likely work as well).
+- Keycloak (repo tags record the Keycloak version we built and tested against; other versions likely work as well).
+- Prebuilt jars for each tag are attached to [GitHub Releases](https://github.com/schwebke/cap-captcha-keycloak/releases); you can skip the *Build* section and jump straight to *Deploy* with the downloaded files.
 - Java 17 (only if building natively instead of via Docker).
 - A [cap Standalone](https://trycap.dev/guide/standalone/) instance, reachable from both the end-user's browser (for the widget) and the Keycloak server (for `siteverify`).
 - From your cap dashboard: the **site key** and its **secret key** (not the dashboard `ADMIN_KEY`).
