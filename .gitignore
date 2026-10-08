@@ -4,3 +4,4 @@ target
 .classpath
 .project
 _result*.yaml
+_result*.md
